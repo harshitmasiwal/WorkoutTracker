@@ -1,0 +1,83 @@
+[
+  {
+    "id": "day-1",
+    "dayOfWeek": "Monday",
+    "focus": "Push Day (Chest, Shoulders, Triceps)",
+    "exercises": [
+      { "id": "ex-101", "name": "Standard Push-ups", "sets": 3, "targetReps": "To failure", "notes": "Keep core tight." },
+      { "id": "ex-102", "name": "Decline Push-ups", "sets": 3, "targetReps": "To failure", "notes": "Feet elevated on bed/chair." },
+      { "id": "ex-103", "name": "Dumbbell Floor Flyes", "sets": 3, "targetReps": "15-20", "notes": "Slow 3-second negative." },
+      { "id": "ex-104", "name": "Dumbbell Overhead Press", "sets": 3, "targetReps": "15", "notes": "Seated or standing." },
+      { "id": "ex-105", "name": "Dumbbell Lateral Raises", "sets": 4, "targetReps": "15", "notes": "Slight bend in elbows." },
+      { "id": "ex-106", "name": "Dumbbell Overhead Triceps Extension", "sets": 3, "targetReps": "15", "notes": "Hold one or both dumbbells." }
+    ]
+  },
+  {
+    "id": "day-2",
+    "dayOfWeek": "Tuesday",
+    "focus": "Legs & Calves",
+    "exercises": [
+      { "id": "ex-201", "name": "Bulgarian Split Squats", "sets": 3, "targetReps": "12-15 per leg", "notes": "Hold 5kg dumbbells. 2-second pause at bottom." },
+      { "id": "ex-202", "name": "Goblet Squats", "sets": 3, "targetReps": "20", "notes": "Hold both dumbbells vertically at chest." },
+      { "id": "ex-203", "name": "Dumbbell Romanian Deadlifts", "sets": 3, "targetReps": "15", "notes": "Focus on hamstring stretch." },
+      { "id": "ex-204", "name": "Standing Calf Raises", "sets": 4, "targetReps": "25", "notes": "Do on the edge of a stair for full stretch." }
+    ]
+  },
+  {
+    "id": "day-3",
+    "dayOfWeek": "Wednesday",
+    "focus": "Pull Day (Back, Biceps, Core)",
+    "exercises": [
+      { "id": "ex-301", "name": "Dumbbell Bent-Over Rows", "sets": 4, "targetReps": "15-20", "notes": "3-second squeeze at the top of every rep." },
+      { "id": "ex-302", "name": "Dumbbell Floor Pullovers", "sets": 3, "targetReps": "15", "notes": "Lie on back, lower weight behind head." },
+      { "id": "ex-303", "name": "Superman Raises", "sets": 3, "targetReps": "15", "notes": "Hold at the top for 2 seconds." },
+      { "id": "ex-304", "name": "Dumbbell Bicep Curls", "sets": 3, "targetReps": "15", "notes": "Strict form, no swinging." },
+      { "id": "ex-305", "name": "Plank", "sets": 3, "targetReps": "60 seconds", "notes": "Keep hips level." }
+    ]
+  },
+  {
+    "id": "day-4",
+    "dayOfWeek": "Thursday",
+    "focus": "Active Recovery & Core",
+    "exercises": [
+      { "id": "ex-401", "name": "Full Body Stretching", "sets": 1, "targetReps": "15 mins", "notes": "Focus on neck, shoulders, and lower back." },
+      { "id": "ex-402", "name": "Russian Twists", "sets": 3, "targetReps": "20", "notes": "Hold one 5kg dumbbell." },
+      { "id": "ex-403", "name": "Lying Leg Raises", "sets": 3, "targetReps": "15", "notes": "Keep lower back pressed into the floor." }
+    ]
+  },
+  {
+    "id": "day-5",
+    "dayOfWeek": "Friday",
+    "focus": "Full Body Circuit",
+    "exercises": [
+      { "id": "ex-501", "name": "Dumbbell Thrusters", "sets": 3, "targetReps": "15", "notes": "Squat into an overhead press." },
+      { "id": "ex-502", "name": "Dumbbell Reverse Lunges", "sets": 3, "targetReps": "12 per leg", "notes": "Keep chest up." },
+      { "id": "ex-503", "name": "Diamond Push-ups", "sets": 3, "targetReps": "To failure", "notes": "Hands close together." },
+      { "id": "ex-504", "name": "Dumbbell Hammer Curls", "sets": 3, "targetReps": "15", "notes": "Palms facing each other." }
+    ]
+  },
+  {
+    "id": "day-6",
+    "dayOfWeek": "Saturday",
+    "focus": "Advanced Lower Body & Shoulders",
+    "exercises": [
+      { "id": "ex-601", "name": "Jump Squats", "sets": 3, "targetReps": "15", "notes": "Bodyweight. Explode upwards." },
+      { "id": "ex-602", "name": "Bulgarian Split Squats", "sets": 4, "targetReps": "12 per leg", "notes": "2-second pause at the bottom." },
+      { "id": "ex-603", "name": "Pike Push-ups", "sets": 3, "targetReps": "To failure", "notes": "Hips high in the air." },
+      { "id": "ex-604", "name": "Dumbbell Front Raises", "sets": 3, "targetReps": "15", "notes": "Control the weight on the way down." },
+      { "id": "ex-605", "name": "Standing Calf Raises", "sets": 4, "targetReps": "20", "notes": "Pause and squeeze at the top." }
+    ]
+  },
+  {
+    "id": "day-7",
+    "dayOfWeek": "Sunday",
+    "focus": "Advanced Upper Body & Arms",
+    "exercises": [
+      { "id": "ex-701", "name": "Wide-Grip Push-ups", "sets": 3, "targetReps": "To failure", "notes": "Focus on chest stretch." },
+      { "id": "ex-702", "name": "Dumbbell Floor Press", "sets": 4, "targetReps": "20", "notes": "Drive elbows into the floor." },
+      { "id": "ex-703", "name": "Renegade Rows", "sets": 4, "targetReps": "12 per arm", "notes": "Push-up position, row one weight at a time." },
+      { "id": "ex-704", "name": "Dumbbell Concentration Curls", "sets": 3, "targetReps": "12 per arm", "notes": "Elbow rested on inner thigh." },
+      { "id": "ex-705", "name": "Bicycle Crunches", "sets": 3, "targetReps": "30", "notes": "Slow and controlled." }
+    ]
+  }
+]
