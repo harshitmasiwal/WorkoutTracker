@@ -96,14 +96,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-slate-900 dark:text-slate-100">
-      <div className="pointer-events-none fixed inset-0 -z-10 opacity-80">
-        <div className="absolute left-[-15%] top-[-8%] h-56 w-56 rounded-full bg-cyan-300/35 blur-3xl dark:bg-cyan-500/20" />
-        <div className="absolute right-[-10%] top-[12%] h-52 w-52 rounded-full bg-orange-300/30 blur-3xl dark:bg-indigo-500/25" />
-        <div className="absolute bottom-[-10%] left-[25%] h-56 w-56 rounded-full bg-sky-300/20 blur-3xl dark:bg-fuchsia-500/15" />
-      </div>
-
-      <div className="relative mx-auto min-h-screen max-w-md border-x border-slate-300/80 bg-white/80 pb-24 shadow-[0_0_45px_-30px_rgba(15,23,42,0.95)] backdrop-blur-xl dark:border-slate-800/90 dark:bg-slate-950/70 dark:shadow-[0_0_55px_-25px_rgba(34,211,238,0.45)]">
-        <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/85 px-4 py-4 backdrop-blur-xl dark:border-slate-800/90 dark:bg-slate-950/80">
+      <div className="relative mx-auto min-h-screen max-w-md border-x border-slate-300/80 bg-white pb-24 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+        <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/95 px-4 py-4 dark:border-slate-800 dark:bg-slate-950/95">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-600 dark:text-cyan-300">
