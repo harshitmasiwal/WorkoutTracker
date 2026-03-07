@@ -43,6 +43,29 @@ export default function App() {
   const completedForDate = completedExercises[dateKey] || {};
   const isDark = theme === "dark";
 
+  const calculateCurrentStreak = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let streak = 0;
+    let currentDate = new Date(today);
+
+    for (let i = 0; i < 365; i++) {
+      const dateKeyCheck = getLocalDateKey(currentDate);
+
+      if (completedExercises[dateKeyCheck]) {
+        streak++;
+        currentDate.setDate(currentDate.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+
+    return streak;
+  };
+
+  const currentStreak = calculateCurrentStreak();
+
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("dark", isDark);
@@ -187,7 +210,14 @@ export default function App() {
               <h1 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">
                 {userName ? `Welcome, ${userName}!` : "Workout + DSA Tracker"}
               </h1>
-              <p className="text-sm text-slate-600 dark:text-zinc-300">{getReadableDate()}</p>
+              <div className="mt-2 flex items-center gap-4">
+                <p className="text-sm text-slate-600 dark:text-zinc-300">{getReadableDate()}</p>
+                {currentStreak > 0 && (
+                  <p className="flex items-center gap-1 text-sm font-semibold text-orange-600 dark:text-orange-400">
+                    🔥 {currentStreak} day streak
+                  </p>
+                )}
+              </div>
             </div>
 
             <div className="flex items-center gap-2">

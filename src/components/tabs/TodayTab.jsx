@@ -107,6 +107,7 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, onResetToda
                 <Input
                   type="number"
                   min="1"
+                  max="249"
                   inputMode="numeric"
                   value={inputValue}
                   onChange={(event) =>
@@ -119,10 +120,10 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, onResetToda
                 />
                 <Button
                   type="button"
-                  disabled={isFullyCompleted || Number(inputValue) <= 0}
+                  disabled={isFullyCompleted || Number(inputValue) <= 0 || Number(inputValue) >= 250}
                   onClick={() => {
                     const reps = Number(inputValue);
-                    if (reps > 0) {
+                    if (reps > 0 && reps < 250) {
                       onCompleteSet(exercise.id, reps);
                       setRepInputs((prev) => ({ ...prev, [exercise.id]: "" }));
                     }

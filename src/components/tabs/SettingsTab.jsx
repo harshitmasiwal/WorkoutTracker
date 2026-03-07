@@ -4,6 +4,13 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 
+function getLocalDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export function SettingsTab({
   userName,
   onUserNameChange,
@@ -76,6 +83,27 @@ export function SettingsTab({
     URL.revokeObjectURL(url);
   };
 
+  const calculateCurrentStreak = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let streak = 0;
+    let currentDate = new Date(today);
+
+    for (let i = 0; i < 365; i++) {
+      const dateKey = getLocalDateKey(currentDate);
+
+      if (completedExercises[dateKey]) {
+        streak++;
+        currentDate.setDate(currentDate.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+
+    return streak;
+  };
+
   const generateSummary = () => {
     let totalExercisesLogged = 0;
     let totalSets = 0;
@@ -91,10 +119,12 @@ export function SettingsTab({
     });
 
     completedDays = Object.keys(completedExercises).length;
+    const currentStreak = calculateCurrentStreak();
 
     return {
       totalDaysTracked: completedDays,
       totalSetsCompleted: totalSets,
+      currentStreak: currentStreak,
     };
   };
 
@@ -295,18 +325,23 @@ export function SettingsTab({
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-lg border border-orange-200 bg-orange-50/70 p-3 dark:border-orange-800 dark:bg-zinc-800">
+              <p className="text-xs text-slate-600 dark:text-zinc-400">🔥 Current Streak</p>
+              <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                {summary.currentStreak} day{summary.currentStreak !== 1 ? "s" : ""}
+              </p>
+            </div>
             <div className="rounded-lg border border-cyan-200 bg-cyan-50/70 p-3 dark:border-cyan-800 dark:bg-zinc-800">
-              <p className="text-xs text-slate-600 dark:text-zinc-400">Days Tracked</p>
+              <p className="text-xs text-slate-600 dark:text-zinc-400">Total Days Logged</p>
               <p className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
-                {summary.totalDaysTracked}
-              </p>
+                {summary.totalDaysTracked}</p>
             </div>
-            <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3 dark:border-blue-800 dark:bg-zinc-800">
-              <p className="text-xs text-slate-600 dark:text-zinc-400">Sets Completed</p>
-              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                {summary.totalSetsCompleted}
-              </p>
-            </div>
+          </div>
+          <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3 dark:border-blue-800 dark:bg-zinc-800">
+            <p className="text-xs text-slate-600 dark:text-zinc-400">Sets Completed</p>
+            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              {summary.totalSetsCompleted}
+            </p>
           </div>
         </CardContent>
       </Card>
