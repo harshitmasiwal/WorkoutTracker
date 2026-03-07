@@ -61,27 +61,6 @@ Example workout format:
 
 ---
 
-## Project Structure
-
-```
-WorkoutTracker
-│
-├── src
-│   ├── routes
-│   ├── components
-│   ├── data
-│
-├── static
-│   └── exercise-gifs
-│
-├── docs
-│
-├── package.json
-└── README.md
-```
-
----
-
 ## Installation
 
 Clone the repository:
