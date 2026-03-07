@@ -177,7 +177,7 @@ export default function App() {
   return (
     <div className="min-h-screen text-slate-900 dark:text-zinc-100">
       <div className="relative mx-auto min-h-screen max-w-md border-x border-slate-300/80 bg-white pb-24 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
-        <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/95 px-4 py-4 dark:border-zinc-800 dark:bg-zinc-950/95">
+        <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/95 px-4 py-7 dark:border-zinc-800 dark:bg-zinc-950/95">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-600 dark:text-cyan-300">

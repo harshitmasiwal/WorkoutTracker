@@ -92,7 +92,9 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, onResetToda
                     />
                   ) : (
                     <video
-                      controls
+                      autoPlay
+                      muted
+                      loop
                       className="w-full h-auto object-cover max-h-80"
                       src={videoPath}
                     />
