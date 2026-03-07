@@ -25,7 +25,7 @@ export function FirstTimeGreetingModal({ onComplete }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-sm rounded-2xl bg-white shadow-2xl dark:bg-slate-900">
+      <div className="w-full max-w-sm rounded-2xl bg-white shadow-2xl dark:bg-zinc-900">
         {step === "greeting" ? (
           <div className="space-y-6 p-8 text-center">
             <div className="inline-block rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 p-6">
@@ -36,7 +36,7 @@ export function FirstTimeGreetingModal({ onComplete }) {
               <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
                 Welcome! 🎉
               </h1>
-              <p className="text-slate-600 dark:text-slate-300">
+              <p className="text-slate-600 dark:text-zinc-300">
                 Let's get you started with your fitness journey. First things first - what's your name?
               </p>
             </div>
@@ -54,7 +54,7 @@ export function FirstTimeGreetingModal({ onComplete }) {
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 What's your name?
               </h2>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400">
                 We'll remember it and greet you next time!
               </p>
             </div>
@@ -67,7 +67,7 @@ export function FirstTimeGreetingModal({ onComplete }) {
                 onKeyPress={handleKeyPress}
                 placeholder="Enter your name"
                 autoFocus
-                className="border-slate-300 py-6 text-lg dark:border-slate-700"
+                className="border-slate-300 py-6 text-lg dark:border-zinc-700"
               />
 
               <Button
@@ -79,7 +79,7 @@ export function FirstTimeGreetingModal({ onComplete }) {
               </Button>
             </div>
 
-            <p className="text-center text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-center text-xs text-slate-500 dark:text-zinc-400">
               You can change this anytime in Settings
             </p>
           </div>

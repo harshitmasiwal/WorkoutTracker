@@ -24,7 +24,7 @@ export function DsaTrackerTab({ solvedProblems, onAddProblem, onRemoveProblem, o
       <Card>
         <CardHeader>
           <CardTitle>Log a Problem</CardTitle>
-          <CardDescription className="dark:text-slate-300">Add each LeetCode/DSA problem you solve today.</CardDescription>
+          <CardDescription className="dark:text-zinc-300">Add each LeetCode/DSA problem you solve today.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex items-center gap-2">
@@ -66,15 +66,15 @@ export function DsaTrackerTab({ solvedProblems, onAddProblem, onRemoveProblem, o
         </CardHeader>
         <CardContent>
           {solvedProblems.length === 0 ? (
-            <p className="text-sm text-slate-500 dark:text-slate-300">No problems logged yet.</p>
+            <p className="text-sm text-slate-500 dark:text-zinc-300">No problems logged yet.</p>
           ) : (
             <ul className="space-y-2">
               {solvedProblems.map((problem, index) => (
                 <li
                   key={`${problem}-${index}`}
-                  className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-gradient-to-r from-white to-emerald-50/60 p-3 text-sm dark:border-slate-700 dark:from-slate-900 dark:to-slate-800/70"
+                  className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-gradient-to-r from-white to-emerald-50/60 p-3 text-sm dark:border-zinc-700 dark:from-zinc-900 dark:to-zinc-800/70"
                 >
-                  <span className="text-slate-800 dark:text-slate-100">{problem}</span>
+                  <span className="text-slate-800 dark:text-zinc-100">{problem}</span>
                   <Button
                     type="button"
                     size="icon"
@@ -82,7 +82,7 @@ export function DsaTrackerTab({ solvedProblems, onAddProblem, onRemoveProblem, o
                     onClick={() => onRemoveProblem(index)}
                     aria-label={`Remove ${problem}`}
                   >
-                    <Trash2 className="h-4 w-4 text-slate-500 dark:text-slate-300" />
+                    <Trash2 className="h-4 w-4 text-slate-500 dark:text-zinc-300" />
                   </Button>
                 </li>
               ))}

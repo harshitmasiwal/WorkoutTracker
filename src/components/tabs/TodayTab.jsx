@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 import { Input } from "../ui/input";
 import { WorkoutSuccessPage } from "../WorkoutSuccessPage";
 
-export function TodayTab({ workout, completedForDate, onCompleteSet, userName }) {
+export function TodayTab({ workout, completedForDate, onCompleteSet, onResetToday, userName }) {
   const [repInputs, setRepInputs] = useState({});
 
   const totalSets = useMemo(
@@ -40,7 +40,7 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, userName })
       <Card>
         <CardHeader>
           <CardTitle>No Workout Scheduled</CardTitle>
-          <CardDescription className="dark:text-slate-300">There is no routine configured for today.</CardDescription>
+          <CardDescription className="dark:text-zinc-300">There is no routine configured for today.</CardDescription>
         </CardHeader>
       </Card>
     );
@@ -76,10 +76,10 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, userName })
                 <Dumbbell className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                 <span>{exercise.name}</span>
               </CardTitle>
-              <CardDescription className="dark:text-slate-300">
+              <CardDescription className="dark:text-zinc-300">
                 Target: {exercise.sets} sets - {exercise.targetReps}
               </CardDescription>
-              <p className="text-sm text-slate-600 dark:text-slate-300">{exercise.notes}</p>
+              <p className="text-sm text-slate-600 dark:text-zinc-300">{exercise.notes}</p>
             </CardHeader>
             {videoPath && (
               <div className="px-6 pb-4">
@@ -134,15 +134,15 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, userName })
                 {isFullyCompleted ? (
                   <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                 ) : (
-                  <Circle className="h-4 w-4 text-slate-400 dark:text-slate-500" />
+                  <Circle className="h-4 w-4 text-slate-400 dark:text-zinc-500" />
                 )}
-                <span className="text-slate-700 dark:text-slate-200">
+                <span className="text-slate-700 dark:text-zinc-200">
                   Completed {logs.length} / {exercise.sets} sets
                 </span>
               </div>
 
               {logs.length > 0 && (
-                <ul className="space-y-1 rounded-xl border border-dashed border-cyan-200 bg-cyan-50/70 p-2 text-sm text-slate-700 dark:border-cyan-800 dark:bg-slate-800/60 dark:text-slate-200">
+                <ul className="space-y-1 rounded-xl border border-dashed border-cyan-200 bg-cyan-50/70 p-2 text-sm text-slate-700 dark:border-cyan-800 dark:bg-zinc-800/60 dark:text-zinc-200">
                   {logs.map((log, index) => (
                     <li key={`${exercise.id}-${index}`}>Set {index + 1}: {log.reps} reps</li>
                   ))}
@@ -152,6 +152,18 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, userName })
           </Card>
         );
       })}
+
+      <Card className="border-0 bg-red-50 shadow-sm dark:bg-red-950/30">
+        <CardContent className="pt-6">
+          <Button
+            onClick={onResetToday}
+            variant="outline"
+            className="w-full border-red-200 text-red-600 hover:bg-red-50 dark:border-red-900/70 dark:text-red-300 dark:hover:bg-red-950/40"
+          >
+            Reset Today's Progress
+          </Button>
+        </CardContent>
+      </Card>
     </section>
   );
 }

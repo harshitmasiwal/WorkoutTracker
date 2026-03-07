@@ -114,16 +114,16 @@ export function WeekTab({ workoutData, completedExercises }) {
   return (
     <section className="space-y-4">
       {/* Calendar Widget */}
-      <Card className="border-0 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-sm dark:from-slate-800 dark:to-slate-900">
+      <Card className="border-0 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-sm dark:from-zinc-800 dark:to-zinc-900">
         <CardHeader>
           <div className="flex items-center justify-between gap-3">
             <Button
               onClick={previousMonth}
               size="icon"
               variant="outline"
-              className="h-8 w-8 rounded-lg border-slate-300 dark:border-slate-700"
+              className="h-8 w-8 rounded-lg border-slate-300 dark:border-zinc-700"
             >
-              <ChevronLeft className="h-4 w-4 text-slate-700 dark:text-slate-300" />
+              <ChevronLeft className="h-4 w-4 text-slate-700 dark:text-zinc-300" />
             </Button>
             <CardTitle className="text-slate-900 dark:text-white flex-1 text-center">
               {calendarDays.monthYear}
@@ -132,12 +132,12 @@ export function WeekTab({ workoutData, completedExercises }) {
               onClick={nextMonth}
               size="icon"
               variant="outline"
-              className="h-8 w-8 rounded-lg border-slate-300 dark:border-slate-700"
+              className="h-8 w-8 rounded-lg border-slate-300 dark:border-zinc-700"
             >
-              <ChevronRight className="h-4 w-4 text-slate-700 dark:text-slate-300" />
+              <ChevronRight className="h-4 w-4 text-slate-700 dark:text-zinc-300" />
             </Button>
           </div>
-          <CardDescription className="text-slate-600 dark:text-slate-400">
+          <CardDescription className="text-slate-600 dark:text-zinc-400">
             Workout completion tracker
           </CardDescription>
         </CardHeader>
@@ -148,7 +148,7 @@ export function WeekTab({ workoutData, completedExercises }) {
               {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                 <div
                   key={day}
-                  className="text-center text-xs font-semibold text-slate-600 dark:text-slate-400"
+                  className="text-center text-xs font-semibold text-slate-600 dark:text-zinc-400"
                 >
                   {day}
                 </div>
@@ -173,7 +173,7 @@ export function WeekTab({ workoutData, completedExercises }) {
                     className={`aspect-square rounded-lg p-1 ${
                       isCompleted
                         ? "bg-gradient-to-br from-emerald-400 to-green-500 shadow-md"
-                        : "bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600"
+                        : "bg-white dark:bg-zinc-700 border border-slate-200 dark:border-zinc-600"
                     } flex items-center justify-center`}
                   >
                     <div className="text-center w-full">
@@ -191,11 +191,11 @@ export function WeekTab({ workoutData, completedExercises }) {
             <div className="flex items-center gap-4 pt-2 text-xs">
               <div className="flex items-center gap-2">
                 <div className="h-3 w-3 rounded bg-gradient-to-br from-emerald-400 to-green-500"></div>
-                <span className="text-slate-700 dark:text-slate-300">Completed</span>
+                <span className="text-slate-700 dark:text-zinc-300">Completed</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded border border-slate-300 bg-white dark:bg-slate-700 dark:border-slate-600"></div>
-                <span className="text-slate-700 dark:text-slate-300">Incomplete</span>
+                <div className="h-3 w-3 rounded border border-slate-300 bg-white dark:bg-zinc-700 dark:border-zinc-600"></div>
+                <span className="text-slate-700 dark:text-zinc-300">Incomplete</span>
               </div>
             </div>
           </div>
@@ -203,7 +203,7 @@ export function WeekTab({ workoutData, completedExercises }) {
       </Card>
 
       {/* Weekly Schedule */}
-      <Card className="border-0 bg-gradient-to-br from-slate-50 to-slate-100 shadow-sm dark:from-slate-800 dark:to-slate-900">
+      <Card className="border-0 bg-gradient-to-br from-slate-50 to-slate-100 shadow-sm dark:from-zinc-800 dark:to-zinc-900">
         <CardHeader>
           <CardTitle className="text-slate-900 dark:text-white">This Week's Schedule</CardTitle>
         </CardHeader>
@@ -212,18 +212,18 @@ export function WeekTab({ workoutData, completedExercises }) {
       {workoutData.map((day) => (
         <Card key={day.id}>
           <CardHeader>
-            <CardTitle className="text-slate-900 dark:text-slate-100">{day.dayOfWeek}</CardTitle>
-            <CardDescription className="text-slate-600 dark:text-slate-300">{day.focus}</CardDescription>
+            <CardTitle className="text-slate-900 dark:text-zinc-100">{day.dayOfWeek}</CardTitle>
+            <CardDescription className="text-slate-600 dark:text-zinc-300">{day.focus}</CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="space-y-2">
               {day.exercises.map((exercise) => (
                 <li
                   key={exercise.id}
-                  className="rounded-xl border border-slate-200 bg-gradient-to-r from-white to-cyan-50/50 p-3 text-sm dark:border-slate-700 dark:from-slate-900 dark:to-slate-800/60"
+                  className="rounded-xl border border-slate-200 bg-gradient-to-r from-white to-cyan-50/50 p-3 text-sm dark:border-zinc-700 dark:from-zinc-900 dark:to-zinc-800/60"
                 >
-                  <p className="font-medium text-slate-900 dark:text-slate-100">{exercise.name}</p>
-                  <p className="text-slate-600 dark:text-slate-300">
+                  <p className="font-medium text-slate-900 dark:text-zinc-100">{exercise.name}</p>
+                  <p className="text-slate-600 dark:text-zinc-300">
                     {exercise.sets} sets - {exercise.targetReps}
                   </p>
                 </li>
@@ -248,7 +248,7 @@ export function WeekTab({ workoutData, completedExercises }) {
       {historyEntries.length === 0 ? (
         <Card>
           <CardContent className="pt-4">
-            <p className="text-sm text-slate-600 dark:text-slate-300">No past workout logs yet. Start logging sets in Today.</p>
+            <p className="text-sm text-slate-600 dark:text-zinc-300">No past workout logs yet. Start logging sets in Today.</p>
           </CardContent>
         </Card>
       ) : (
@@ -269,8 +269,8 @@ export function WeekTab({ workoutData, completedExercises }) {
           return (
             <Card key={dateKey}>
               <CardHeader>
-                <CardTitle className="text-slate-900 dark:text-slate-100">{getDisplayDate(dateKey)}</CardTitle>
-                <CardDescription className="text-slate-600 dark:text-slate-300">
+                <CardTitle className="text-slate-900 dark:text-zinc-100">{getDisplayDate(dateKey)}</CardTitle>
+                <CardDescription className="text-slate-600 dark:text-zinc-300">
                   {weekdayName}
                   {dayConfig ? ` - ${dayConfig.focus}` : ""}
                 </CardDescription>
@@ -288,10 +288,10 @@ export function WeekTab({ workoutData, completedExercises }) {
                     return (
                       <li
                         key={`${dateKey}-${exerciseId}`}
-                        className="rounded-xl border border-slate-200 bg-slate-50/85 p-3 text-sm dark:border-slate-700 dark:bg-slate-800/70"
+                        className="rounded-xl border border-slate-200 bg-slate-50/85 p-3 text-sm dark:border-zinc-700 dark:bg-zinc-800/70"
                       >
-                        <p className="font-medium text-slate-900 dark:text-slate-100">{exerciseName}</p>
-                        <p className="text-slate-600 dark:text-slate-300">
+                        <p className="font-medium text-slate-900 dark:text-zinc-100">{exerciseName}</p>
+                        <p className="text-slate-600 dark:text-zinc-300">
                           {logs.length} set(s) - Reps: {repsList}
                         </p>
                       </li>

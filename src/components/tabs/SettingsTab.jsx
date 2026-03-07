@@ -10,6 +10,7 @@ export function SettingsTab({
   completedExercises,
   workoutData,
   onImportData,
+  onHardReset,
 }) {
   const [bmiWeight, setBmiWeight] = useState("");
   const [bmiHeight, setBmiHeight] = useState("");
@@ -51,7 +52,7 @@ export function SettingsTab({
       case "Obese":
         return "text-red-600 dark:text-red-400";
       default:
-        return "text-slate-600 dark:text-slate-400";
+        return "text-slate-600 dark:text-zinc-400";
     }
   };
 
@@ -148,7 +149,7 @@ export function SettingsTab({
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            <label className="text-sm font-medium text-slate-700 dark:text-zinc-200">
               Your Name
             </label>
             <Input
@@ -156,11 +157,11 @@ export function SettingsTab({
               value={userName}
               onChange={(e) => onUserNameChange(e.target.value)}
               placeholder="Enter your name"
-              className="border-slate-300 dark:border-slate-700"
+              className="border-slate-300 dark:border-zinc-700"
             />
           </div>
           {userName && (
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-slate-600 dark:text-zinc-400">
               Welcome, <span className="font-semibold text-slate-900 dark:text-white">{userName}</span>! 💪
             </p>
           )}
@@ -168,10 +169,10 @@ export function SettingsTab({
       </Card>
 
       {/* Import/Export Data Section */}
-      <Card className="border-0 bg-gradient-to-br from-purple-50 to-pink-50 shadow-sm dark:from-slate-800 dark:to-slate-900">
+      <Card className="border-0 bg-gradient-to-br from-purple-50 to-pink-50 shadow-sm dark:from-zinc-800 dark:to-zinc-900">
         <CardHeader>
           <CardTitle>Sync Your Data</CardTitle>
-          <CardDescription className="dark:text-slate-300">
+          <CardDescription className="dark:text-zinc-300">
             Export or import your workout journey across devices
           </CardDescription>
         </CardHeader>
@@ -215,7 +216,7 @@ export function SettingsTab({
             </div>
           )}
 
-          <p className="text-xs text-slate-600 dark:text-slate-400">
+          <p className="text-xs text-slate-600 dark:text-zinc-400">
             Export your data to backup or sync across devices. Import previously exported JSON files to restore your progress.
           </p>
         </CardContent>
@@ -228,14 +229,14 @@ export function SettingsTab({
             <Calculator className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
             BMI Calculator
           </CardTitle>
-          <CardDescription className="dark:text-slate-300">
+          <CardDescription className="dark:text-zinc-300">
             Calculate your Body Mass Index
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+              <label className="text-sm font-medium text-slate-700 dark:text-zinc-200">
                 Weight (kg)
               </label>
               <Input
@@ -245,11 +246,11 @@ export function SettingsTab({
                 value={bmiWeight}
                 onChange={(e) => setBmiWeight(e.target.value)}
                 placeholder="e.g., 70"
-                className="border-slate-300 dark:border-slate-700"
+                className="border-slate-300 dark:border-zinc-700"
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+              <label className="text-sm font-medium text-slate-700 dark:text-zinc-200">
                 Height (cm)
               </label>
               <Input
@@ -259,7 +260,7 @@ export function SettingsTab({
                 value={bmiHeight}
                 onChange={(e) => setBmiHeight(e.target.value)}
                 placeholder="e.g., 175"
-                className="border-slate-300 dark:border-slate-700"
+                className="border-slate-300 dark:border-zinc-700"
               />
             </div>
           </div>
@@ -272,9 +273,9 @@ export function SettingsTab({
           </Button>
 
           {bmiResult && (
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
               <div className="text-center">
-                <p className="text-sm text-slate-600 dark:text-slate-400">Your BMI</p>
+                <p className="text-sm text-slate-600 dark:text-zinc-400">Your BMI</p>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">
                   {bmiResult.value}
                 </p>
@@ -294,14 +295,14 @@ export function SettingsTab({
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-lg border border-cyan-200 bg-cyan-50/70 p-3 dark:border-cyan-800 dark:bg-slate-800">
-              <p className="text-xs text-slate-600 dark:text-slate-400">Days Tracked</p>
+            <div className="rounded-lg border border-cyan-200 bg-cyan-50/70 p-3 dark:border-cyan-800 dark:bg-zinc-800">
+              <p className="text-xs text-slate-600 dark:text-zinc-400">Days Tracked</p>
               <p className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
                 {summary.totalDaysTracked}
               </p>
             </div>
-            <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3 dark:border-blue-800 dark:bg-slate-800">
-              <p className="text-xs text-slate-600 dark:text-slate-400">Sets Completed</p>
+            <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-3 dark:border-blue-800 dark:bg-zinc-800">
+              <p className="text-xs text-slate-600 dark:text-zinc-400">Sets Completed</p>
               <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                 {summary.totalSetsCompleted}
               </p>
@@ -311,57 +312,62 @@ export function SettingsTab({
       </Card>
 
       {/* Buy Me A Coffee Section */}
-      <Card className="border-0 bg-gradient-to-br from-amber-50 to-orange-50 shadow-sm dark:from-slate-800 dark:to-slate-900">
+      <Card className="border-0 bg-gradient-to-br from-amber-50 to-orange-50 shadow-sm dark:from-zinc-800 dark:to-zinc-900">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Heart className="h-4 w-4 text-red-500" />
             Support the Creator
           </CardTitle>
-          <CardDescription className="dark:text-slate-300">
+          <CardDescription className="dark:text-zinc-300">
             Love this app? Buy me a coffee ☕
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="rounded-lg border border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-slate-700">
-            <p className="mb-3 text-sm font-medium text-slate-700 dark:text-slate-200">UPI ID</p>
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                value="7827902652@upi"
-                readOnly
-                className="flex-1 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-800 dark:text-white"
+          <div className="flex flex-col gap-6 items-center">
+            <div className="rounded-lg border-2 border-amber-200 bg-white p-3 dark:border-amber-900 dark:bg-zinc-700">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3D7827902652%40upi%26pn%3DHarshit%2520Masiwal"
+                alt="Scan to Pay via UPI"
+                className="w-56 h-56 rounded-lg"
               />
-              <Button
-                onClick={() => {
-                  navigator.clipboard.writeText("7827902652@upi");
-                  alert("UPI copied to clipboard!");
-                }}
-                className="bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600"
-              >
-                Copy
-              </Button>
             </div>
-          </div>
 
-          <Button
-            onClick={() => window.open("upi://pay?pa=7827902652@upi&pn=Harshit%20Masiwal")}
-            className="w-full gap-2 bg-gradient-to-r from-orange-500 to-red-500 py-6 text-white hover:from-orange-600 hover:to-red-600"
-          >
-            <Heart className="h-4 w-4" />
-            Send via UPI
-          </Button>
+            <div className="w-full space-y-3">
+              <div className="rounded-lg border border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-zinc-700">
+                <p className="mb-3 text-sm font-medium text-slate-700 dark:text-zinc-200">UPI ID</p>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value="7827902652@upi"
+                    readOnly
+                    className="flex-1 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-800 dark:text-white"
+                  />
+                  <Button
+                    onClick={() => {
+                      navigator.clipboard.writeText("7827902652@upi");
+                      alert("UPI copied to clipboard!");
+                    }}
+                    className="bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600"
+                  >
+                    Copy
+                  </Button>
+                </div>
+              </div>
+
+              </div>
+          </div>
         </CardContent>
       </Card>
 
       {/* Creator & Social Links Section */}
-      <Card className="border-0 bg-gradient-to-br from-slate-50 to-slate-100 shadow-sm dark:from-slate-800 dark:to-slate-900">
+      <Card className="border-0 bg-gradient-to-br from-slate-50 to-slate-100 shadow-sm dark:from-zinc-800 dark:to-zinc-900">
         <CardHeader>
           <CardTitle className="text-slate-900 dark:text-white">Created by</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-center">
             <p className="text-xl font-bold text-slate-900 dark:text-white">Harshit Masiwal</p>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Full-Stack Developer</p>
+            <p className="mt-1 text-sm text-slate-600 dark:text-zinc-400">Full-Stack Developer</p>
           </div>
 
           <div className="flex gap-3 justify-center">
@@ -369,7 +375,7 @@ export function SettingsTab({
               href="https://github.com/harshitmasiwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-white hover:bg-slate-900 dark:bg-zinc-700 dark:hover:bg-zinc-600 transition-colors"
               title="GitHub"
             >
               <Github className="h-5 w-5" />
@@ -394,8 +400,29 @@ export function SettingsTab({
             </a>
           </div>
 
-          <p className="text-center text-xs text-slate-600 dark:text-slate-400">
+          <p className="text-center text-xs text-slate-600 dark:text-zinc-400">
             Made with 💪 for fitness enthusiasts
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Hard Reset Section */}
+      <Card className="border-0 bg-red-50 shadow-sm dark:bg-red-950/30">
+        <CardHeader>
+          <CardTitle className="text-red-700 dark:text-red-300">⚠️ Danger Zone</CardTitle>
+          <CardDescription className="text-red-600 dark:text-red-400">
+            This action cannot be undone
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button
+            onClick={onHardReset}
+            className="w-full bg-red-600 text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
+          >
+            Hard Reset All Data
+          </Button>
+          <p className="mt-3 text-xs text-red-600 dark:text-red-400">
+            This will permanently delete all your workout progress, logs, and settings. Make sure you export your data first if you want to backup.
           </p>
         </CardContent>
       </Card>

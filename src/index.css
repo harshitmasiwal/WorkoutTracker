@@ -22,11 +22,11 @@
   }
 
   * {
-    @apply border-slate-200 dark:border-slate-800;
+    @apply border-slate-200 dark:border-zinc-800;
   }
 
   body {
-    @apply text-slate-900 antialiased dark:text-slate-100;
+    @apply text-slate-900 antialiased dark:text-zinc-100;
     font-family: "Space Grotesk", "Manrope", sans-serif;
     background-color: #f8fafc;
     background-image:

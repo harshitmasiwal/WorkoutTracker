@@ -72,20 +72,52 @@ export default function App() {
     });
   };
 
-  const resetAppData = () => {
+  
+  const resetTodayData = () => {
     const shouldReset = window.confirm(
-      "Reset all saved workout progress? This action cannot be undone."
+      "Reset today's workout progress? This action cannot be undone."
     );
     if (!shouldReset) {
       return;
     }
 
-    setCompletedExercises({});
-    setActiveTab("today");
+    setCompletedExercises((previous) => {
+      const updated = { ...previous };
+      delete updated[dateKey];
+      return updated;
+    });
 
+    try {
+      const stored = window.localStorage.getItem("completedExercises");
+      if (stored) {
+        const data = JSON.parse(stored);
+        delete data[dateKey];
+        window.localStorage.setItem("completedExercises", JSON.stringify(data));
+      }
+    } catch (error) {
+      console.error("Failed to reset today's data:", error);
+    }
+  };
+
+  const resetAppData = () => {
+    const shouldReset = window.confirm(
+      "Hard reset will delete ALL workout progress, logs, and your name. This action cannot be undone. Are you sure?"
+    );
+    if (!shouldReset) {
+      return;
+    }
+
+    // Clear all state
+    setCompletedExercises({});
+    setUserName("");
+    setActiveTab("today");
+    setShowGreetingModal(true);
+
+    // Clear all localStorage
     try {
       window.localStorage.removeItem("completedExercises");
       window.localStorage.removeItem("activeTab");
+      window.localStorage.removeItem("userName");
     } catch (error) {
       console.error("Failed to reset app data:", error);
     }
@@ -109,9 +141,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-slate-900 dark:text-slate-100">
-      <div className="relative mx-auto min-h-screen max-w-md border-x border-slate-300/80 bg-white pb-24 shadow-sm dark:border-slate-800 dark:bg-slate-950">
-        <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/95 px-4 py-4 dark:border-slate-800 dark:bg-slate-950/95">
+    <div className="min-h-screen text-slate-900 dark:text-zinc-100">
+      <div className="relative mx-auto min-h-screen max-w-md border-x border-slate-300/80 bg-white pb-24 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+        <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/95 px-4 py-4 dark:border-zinc-800 dark:bg-zinc-950/95">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-600 dark:text-cyan-300">
@@ -121,27 +153,16 @@ export default function App() {
               <h1 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">
                 {userName ? `Welcome, ${userName}!` : "Workout + DSA Tracker"}
               </h1>
-              <p className="text-sm text-slate-600 dark:text-slate-300">{getReadableDate()}</p>
+              <p className="text-sm text-slate-600 dark:text-zinc-300">{getReadableDate()}</p>
             </div>
 
             <div className="flex items-center gap-2">
-              <Button
-                type="button"
-                size="icon"
-                variant="outline"
-                className="rounded-full border-red-200 bg-white/90 text-red-600 hover:bg-red-50 dark:border-red-900/70 dark:bg-slate-900 dark:text-red-300 dark:hover:bg-red-950/40"
-                onClick={resetAppData}
-                aria-label="Reset app data"
-                title="Reset saved progress"
-              >
-                <RotateCcw className="h-4 w-4" />
-              </Button>
 
               <Button
                 type="button"
                 size="icon"
                 variant="outline"
-                className="rounded-full border-slate-300/80 bg-white/90 dark:border-slate-700 dark:bg-slate-900"
+                className="rounded-full border-slate-300/80 bg-white/90 dark:border-zinc-700 dark:bg-zinc-900"
                 onClick={() => setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"))}
                 aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
                 title={isDark ? "Switch to light mode" : "Switch to dark mode"}
@@ -158,6 +179,7 @@ export default function App() {
               workout={todayWorkout}
               completedForDate={completedForDate}
               onCompleteSet={addCompletedSet}
+              onResetToday={resetTodayData}
               userName={userName}
             />
           )}
@@ -173,6 +195,7 @@ export default function App() {
               completedExercises={completedExercises}
               workoutData={workoutData}
               onImportData={importData}
+              onHardReset={resetAppData}
             />
           )}
         </main>
