@@ -116,6 +116,15 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, onResetToda
                       [exercise.id]: event.target.value,
                     }))
                   }
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      const reps = Number(inputValue);
+                      if (reps > 0 && reps < 250 && !isFullyCompleted) {
+                        onCompleteSet(exercise.id, reps);
+                        setRepInputs((prev) => ({ ...prev, [exercise.id]: "" }));
+                      }
+                    }
+                  }}
                   placeholder="Reps completed"
                 />
                 <Button
