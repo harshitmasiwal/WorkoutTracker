@@ -3,8 +3,9 @@ import { CheckCircle2, Circle, Dumbbell } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
+import { WorkoutSuccessPage } from "../WorkoutSuccessPage";
 
-export function TodayTab({ workout, completedForDate, onCompleteSet }) {
+export function TodayTab({ workout, completedForDate, onCompleteSet, userName }) {
   const [repInputs, setRepInputs] = useState({});
 
   const totalSets = useMemo(
@@ -23,6 +24,11 @@ export function TodayTab({ workout, completedForDate, onCompleteSet }) {
     }, 0);
   }, [completedForDate, workout]);
 
+  const isAllCompleted = useMemo(() => {
+    if (!workout || totalSets === 0) return false;
+    return completedSets >= totalSets;
+  }, [completedSets, totalSets, workout]);
+
   const getVideoPath = (exercise) => {
     if (!exercise.video) return null;
     const dayFolder = workout.dayOfWeek.replace(" ", "%20");
@@ -38,6 +44,10 @@ export function TodayTab({ workout, completedForDate, onCompleteSet }) {
         </CardHeader>
       </Card>
     );
+  }
+
+  if (isAllCompleted) {
+    return <WorkoutSuccessPage userName={userName} dayOfWeek={workout.dayOfWeek} focus={workout.focus} totalSets={totalSets} />;
   }
 
   return (

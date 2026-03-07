@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Moon, RotateCcw, Sparkles, Sun } from "lucide-react";
 import workoutData from "../data.json";
 import { BottomNav } from "./components/BottomNav";
-import { DsaTrackerTab } from "./components/tabs/DsaTrackerTab";
 import { TodayTab } from "./components/tabs/TodayTab";
 import { WeekTab } from "./components/tabs/WeekTab";
+import { SettingsTab } from "./components/tabs/SettingsTab";
+import { FirstTimeGreetingModal } from "./components/FirstTimeGreetingModal";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { Button } from "./components/ui/button";
 
@@ -30,14 +31,14 @@ function getReadableDate(date = new Date()) {
 export default function App() {
   const [activeTab, setActiveTab] = useLocalStorage("activeTab", "today");
   const [completedExercises, setCompletedExercises] = useLocalStorage("completedExercises", {});
-  const [dsaProgress, setDsaProgress] = useLocalStorage("dsaProgress", {});
   const [theme, setTheme] = useLocalStorage("theme", "light");
+  const [userName, setUserName] = useLocalStorage("userName", "");
+  const [showGreetingModal, setShowGreetingModal] = useState(!userName);
 
   const dateKey = getLocalDateKey();
   const weekday = getCurrentWeekday();
   const todayWorkout = workoutData.find((day) => day.dayOfWeek === weekday) ?? null;
   const completedForDate = completedExercises[dateKey] || {};
-  const solvedProblems = dsaProgress[dateKey] || [];
   const isDark = theme === "dark";
 
   useEffect(() => {
@@ -47,6 +48,12 @@ export default function App() {
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
       metaTheme.setAttribute("content", isDark ? "#020617" : "#0f172a");
+    }
+
+    // Update favicon based on theme
+    const faviconLink = document.getElementById("favicon");
+    if (faviconLink) {
+      faviconLink.href = isDark ? "/icon-dark.svg" : "/icon-light.svg";
     }
   }, [isDark]);
 
@@ -65,53 +72,39 @@ export default function App() {
     });
   };
 
-  const addSolvedProblem = (problemName) => {
-    setDsaProgress((previous) => {
-      const currentList = previous[dateKey] || [];
-      return {
-        ...previous,
-        [dateKey]: [...currentList, problemName],
-      };
-    });
-  };
-
-  const removeSolvedProblem = (problemIndex) => {
-    setDsaProgress((previous) => {
-      const currentList = previous[dateKey] || [];
-      return {
-        ...previous,
-        [dateKey]: currentList.filter((_, index) => index !== problemIndex),
-      };
-    });
-  };
-
-  const clearTodayProblems = () => {
-    setDsaProgress((previous) => {
-      return {
-        ...previous,
-        [dateKey]: [],
-      };
-    });
-  };
-
   const resetAppData = () => {
     const shouldReset = window.confirm(
-      "Reset all saved workout and DSA progress? This action cannot be undone."
+      "Reset all saved workout progress? This action cannot be undone."
     );
     if (!shouldReset) {
       return;
     }
 
     setCompletedExercises({});
-    setDsaProgress({});
     setActiveTab("today");
 
     try {
       window.localStorage.removeItem("completedExercises");
-      window.localStorage.removeItem("dsaProgress");
       window.localStorage.removeItem("activeTab");
     } catch (error) {
       console.error("Failed to reset app data:", error);
+    }
+  };
+
+  const importData = (importedData) => {
+    try {
+      // Import completed exercises
+      if (importedData.completedExercises && typeof importedData.completedExercises === "object") {
+        setCompletedExercises(importedData.completedExercises);
+      }
+
+      // Import user name if available
+      if (importedData.userName) {
+        setUserName(importedData.userName);
+      }
+    } catch (error) {
+      console.error("Error importing data:", error);
+      alert("Error importing data. Please check the file and try again.");
     }
   };
 
@@ -122,10 +115,12 @@ export default function App() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-600 dark:text-cyan-300">
-                <Sparkles className="h-3.5 w-3.5" />
+                <img src={isDark ? "/icon-dark.svg" : "/icon-light.svg"} alt="Track Better" className="h-3.5 w-3.5" />
                 Track Better
               </p>
-              <h1 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">Workout + DSA Tracker</h1>
+              <h1 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">
+                {userName ? `Welcome, ${userName}!` : "Workout + DSA Tracker"}
+              </h1>
               <p className="text-sm text-slate-600 dark:text-slate-300">{getReadableDate()}</p>
             </div>
 
@@ -163,6 +158,7 @@ export default function App() {
               workout={todayWorkout}
               completedForDate={completedForDate}
               onCompleteSet={addCompletedSet}
+              userName={userName}
             />
           )}
 
@@ -170,18 +166,28 @@ export default function App() {
             <WeekTab workoutData={workoutData} completedExercises={completedExercises} />
           )}
 
-          {activeTab === "dsa" && (
-            <DsaTrackerTab
-              solvedProblems={solvedProblems}
-              onAddProblem={addSolvedProblem}
-              onRemoveProblem={removeSolvedProblem}
-              onClearToday={clearTodayProblems}
+          {activeTab === "settings" && (
+            <SettingsTab
+              userName={userName}
+              onUserNameChange={setUserName}
+              completedExercises={completedExercises}
+              workoutData={workoutData}
+              onImportData={importData}
             />
           )}
         </main>
       </div>
 
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+
+      {showGreetingModal && (
+        <FirstTimeGreetingModal
+          onComplete={(name) => {
+            setUserName(name);
+            setShowGreetingModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import { CalendarDays, Code2, SunMedium } from "lucide-react";
+import { CalendarDays, SunMedium, Settings } from "lucide-react";
 import { cn } from "../lib/utils";
 
 const tabs = [
   { id: "today", label: "Today", icon: SunMedium },
   { id: "week", label: "Week", icon: CalendarDays },
-  { id: "dsa", label: "DSA Tracker", icon: Code2 },
+  { id: "settings", label: "Settings", icon: Settings },
 ];
 
 export function BottomNav({ activeTab, onTabChange }) {
