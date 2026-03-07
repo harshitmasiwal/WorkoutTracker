@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Moon, RotateCcw, Sparkles, Sun } from "lucide-react";
+import { Moon, RotateCcw, Download, Sun } from "lucide-react";
 import workoutData from "../data.json";
 import { BottomNav } from "./components/BottomNav";
 import { TodayTab } from "./components/tabs/TodayTab";
@@ -34,6 +34,8 @@ export default function App() {
   const [theme, setTheme] = useLocalStorage("theme", "light");
   const [userName, setUserName] = useLocalStorage("userName", "");
   const [showGreetingModal, setShowGreetingModal] = useState(!userName);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
 
   const dateKey = getLocalDateKey();
   const weekday = getCurrentWeekday();
@@ -56,6 +58,27 @@ export default function App() {
       faviconLink.href = isDark ? "/icon-dark.svg" : "/icon-light.svg";
     }
   }, [isDark]);
+
+  // PWA Install Prompt
+  useEffect(() => {
+    // Register service worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch((err) => console.error("SW registration failed:", err));
+    }
+
+    // Listen for install prompt
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallButton(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
 
   const addCompletedSet = (exerciseId, reps) => {
     setCompletedExercises((previous) => {
@@ -123,6 +146,17 @@ export default function App() {
     }
   };
 
+  const handleInstall = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      setDeferredPrompt(null);
+      setShowInstallButton(false);
+    }
+  };
+
   const importData = (importedData) => {
     try {
       // Import completed exercises
@@ -157,6 +191,19 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-2">
+              {showInstallButton && (
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="outline"
+                  className="rounded-full border-cyan-200 bg-cyan-50/90 text-cyan-700 hover:bg-cyan-100 dark:border-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300 dark:hover:bg-cyan-900/50"
+                  onClick={handleInstall}
+                  aria-label="Install app"
+                  title="Install app"
+                >
+                  <Download className="h-4 w-4" />
+                </Button>
+              )}
 
               <Button
                 type="button"
