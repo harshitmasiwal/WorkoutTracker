@@ -25,7 +25,7 @@ export function WorkoutSuccessPage({ userName, dayOfWeek, focus, totalSets, exer
   });
 
   const shareText = `I just tracked my ${focus} workout on Track Better. I did ${totalSets} sets ! 
-  Click on the Link and track your own goals using my link:\n\nhttps://track-better.vercel.app/`;
+  Click on the Link and track your own goals :\n\nhttps://track-better.vercel.app/`;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText("https://track-better.vercel.app/");
