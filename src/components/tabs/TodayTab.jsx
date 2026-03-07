@@ -23,6 +23,12 @@ export function TodayTab({ workout, completedForDate, onCompleteSet }) {
     }, 0);
   }, [completedForDate, workout]);
 
+  const getVideoPath = (exercise) => {
+    if (!exercise.video) return null;
+    const dayFolder = workout.dayOfWeek.replace(" ", "%20");
+    return `/workout/${dayFolder}/${exercise.video}`;
+  };
+
   if (!workout) {
     return (
       <Card>
@@ -50,6 +56,8 @@ export function TodayTab({ workout, completedForDate, onCompleteSet }) {
         const logs = completedForDate[exercise.id] || [];
         const isFullyCompleted = logs.length >= exercise.sets;
         const inputValue = repInputs[exercise.id] || "";
+        const videoPath = getVideoPath(exercise);
+        const isGif = exercise.video?.endsWith(".gif");
 
         return (
           <Card key={exercise.id}>
@@ -63,6 +71,25 @@ export function TodayTab({ workout, completedForDate, onCompleteSet }) {
               </CardDescription>
               <p className="text-sm text-slate-600 dark:text-slate-300">{exercise.notes}</p>
             </CardHeader>
+            {videoPath && (
+              <div className="px-6 pb-4">
+                <div className="mb-4 rounded-lg overflow-hidden bg-slate-900 shadow-md">
+                  {isGif ? (
+                    <img
+                      src={videoPath}
+                      alt={exercise.name}
+                      className="w-full h-auto object-cover max-h-80"
+                    />
+                  ) : (
+                    <video
+                      controls
+                      className="w-full h-auto object-cover max-h-80"
+                      src={videoPath}
+                    />
+                  )}
+                </div>
+              </div>
+            )}
             <CardContent className="space-y-3">
               <div className="flex items-center gap-2">
                 <Input

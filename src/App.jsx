@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Moon, Sparkles, Sun } from "lucide-react";
+import { Moon, RotateCcw, Sparkles, Sun } from "lucide-react";
 import workoutData from "../data.json";
 import { BottomNav } from "./components/BottomNav";
 import { DsaTrackerTab } from "./components/tabs/DsaTrackerTab";
@@ -94,6 +94,27 @@ export default function App() {
     });
   };
 
+  const resetAppData = () => {
+    const shouldReset = window.confirm(
+      "Reset all saved workout and DSA progress? This action cannot be undone."
+    );
+    if (!shouldReset) {
+      return;
+    }
+
+    setCompletedExercises({});
+    setDsaProgress({});
+    setActiveTab("today");
+
+    try {
+      window.localStorage.removeItem("completedExercises");
+      window.localStorage.removeItem("dsaProgress");
+      window.localStorage.removeItem("activeTab");
+    } catch (error) {
+      console.error("Failed to reset app data:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen text-slate-900 dark:text-slate-100">
       <div className="relative mx-auto min-h-screen max-w-md border-x border-slate-300/80 bg-white pb-24 shadow-sm dark:border-slate-800 dark:bg-slate-950">
@@ -108,16 +129,31 @@ export default function App() {
               <p className="text-sm text-slate-600 dark:text-slate-300">{getReadableDate()}</p>
             </div>
 
-            <Button
-              type="button"
-              size="icon"
-              variant="outline"
-              className="rounded-full border-slate-300/80 bg-white/90 dark:border-slate-700 dark:bg-slate-900"
-              onClick={() => setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"))}
-              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {isDark ? <Sun className="h-4 w-4 text-amber-300" /> : <Moon className="h-4 w-4 text-slate-800" />}
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                size="icon"
+                variant="outline"
+                className="rounded-full border-red-200 bg-white/90 text-red-600 hover:bg-red-50 dark:border-red-900/70 dark:bg-slate-900 dark:text-red-300 dark:hover:bg-red-950/40"
+                onClick={resetAppData}
+                aria-label="Reset app data"
+                title="Reset saved progress"
+              >
+                <RotateCcw className="h-4 w-4" />
+              </Button>
+
+              <Button
+                type="button"
+                size="icon"
+                variant="outline"
+                className="rounded-full border-slate-300/80 bg-white/90 dark:border-slate-700 dark:bg-slate-900"
+                onClick={() => setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"))}
+                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+                title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {isDark ? <Sun className="h-4 w-4 text-amber-300" /> : <Moon className="h-4 w-4 text-slate-800" />}
+              </Button>
+            </div>
           </div>
         </header>
 

@@ -1,9 +1,18 @@
-const CACHE_NAME = "workout-dsa-pwa-v1";
+const CACHE_NAME = "workout-dsa-pwa-v2";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(["/", "/index.html", "/manifest.webmanifest"]);
+      return cache.addAll([
+        "/",
+        "/index.html",
+        "/manifest.webmanifest",
+        "/pwa-192x192.png",
+        "/pwa-512x512.png",
+        "/apple-touch-icon.png",
+        "/favicon-32x32.png",
+        "/favicon-16x16.png",
+      ]);
     })
   );
   self.skipWaiting();
