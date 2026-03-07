@@ -51,7 +51,7 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, onResetToda
   }
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-6">
       <Card className="border-0 bg-gradient-to-br from-cyan-500 via-sky-500 to-blue-700 text-white shadow-[0_20px_40px_-20px_rgba(2,132,199,0.85)] dark:from-cyan-600 dark:via-sky-700 dark:to-indigo-800">
         <CardHeader>
           <CardDescription className="text-cyan-50/90">{workout.dayOfWeek}</CardDescription>
@@ -70,7 +70,7 @@ export function TodayTab({ workout, completedForDate, onCompleteSet, onResetToda
         const isGif = exercise.video?.endsWith(".gif");
 
         return (
-          <Card key={exercise.id}>
+          <Card key={exercise.id} className={isFullyCompleted ? "bg-gradient-to-br from-green-400/40 to-emerald-400/40 border-green-300 dark:border-green-700 dark:from-green-600 dark:to-emerald-700/20" : ""}>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Dumbbell className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
